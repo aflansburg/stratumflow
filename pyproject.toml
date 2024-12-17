@@ -10,9 +10,14 @@ dependencies = [
     "google-api-core>=2.24.0",
     "google-cloud-bigquery>=3.27.0",
     "google-cloud-core>=2.4.1",
+    "requests>=2.32.3",
+    "structlog>=24.4.0",
 ]
 
 [tool.uv]
 dev-dependencies = [
+    "black>=24.10.0",
+    "mypy>=1.13.0",
     "pytest>=8.3.4",
+    "python-dotenv>=1.0.1",
 ]
