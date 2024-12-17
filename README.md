@@ -13,6 +13,13 @@ TBD: Diagram
 
 ## Local Setup
 
+1. Make sure you have [uv](https://docs.astral.sh/uv/)
+2. Clone the repo
+3. Create virtual environment with `uv venv `.
+4. Activate the virtual environment with `source .venv/bin/activate`
+5. Install the project's pinned Python version with `uv python install`
+6. Install all deps with `uv sync --all-extras --dev`
+7. Run tests locally with `uv run pytest ./tests`
 
 ## CI/CD
 

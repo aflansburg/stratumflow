@@ -3,7 +3,7 @@ name = "paubox-cloud-functions"
 version = "0.1.0"
 description = "Add your description here"
 readme = "README.md"
-requires-python = ">=3.13"
+requires-python = ">=3.12.7"
 dependencies = [
     "cloudevents>=1.11.0",
     "functions-framework>=3.8.2",
