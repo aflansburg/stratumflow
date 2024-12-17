@@ -25,10 +25,10 @@ def subscribe(cloud_event: CloudEvent) -> None:
         return
 
 #for local testing
-# if __name__ == "__main__":
+if __name__ == "__main__":
     # from src.paubox.subscription_list import get_subscription_list, create_subscription_list
     # print(get_subscription_list())
     # print(create_subscription_list("[Internal] Test API POST"))
     
-    # from src.paubox.subscribers import get_subscribers
-    # print(get_subscribers())
+    from src.paubox.subscribers import get_subscribers
+    print(get_subscribers())

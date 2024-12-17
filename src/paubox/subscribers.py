@@ -12,48 +12,60 @@ app_config = AppConfig()
 log = get_logger()
 
 def get_subscribers(subscription_list_id: Optional[str] = None):
-    PAGE_SIZE = 50
     RATE_LIMIT_SLEEP_TIME = 1
+    ITEMS_PER_PAGE = 1000
 
     url = app_config.PAUBOX_MARKETING_API_URL + f"/subscribers"
 
-    params = {}
+    params = {"page": 1, "items": ITEMS_PER_PAGE}
     if subscription_list_id:
         params["subscription_list_id"] = subscription_list_id
 
-    params["page"] = 1
-    # params["items"] = 1
-
-    log.info(f"Initial request to {url} with params {params} to ascertain total count")
-    
     headers = generate_paubox_api_headers("marketing")
-    response = requests.get(url, headers=headers, params=params)
-
-    if response.status_code != 200:
-        log.error(f"Failed to get subscribers: {response.status_code} {response.text}")
-        raise Exception(f"Failed to get subscribers: {response.status_code} {response.text}")
-
-    total_count = response.json()["total_count"]
-
-    log.info(f"Total subscribers to fetch: {total_count}")
-    log.info(f"Total pages to fetch: {total_count // PAGE_SIZE}")
-
     subscribers = []
-    for page in range(1, total_count // PAGE_SIZE + 1):
-        log.info(f"Requesting page {page} of {total_count // PAGE_SIZE}")
-        
-        params["page"] = page
+
+    init_request = requests.get(url, headers=headers, params=params)
+    if init_request.status_code != 200:
+        log.error(f"Failed to get subscribers: {init_request.status_code} {init_request.text}")
+        raise Exception(f"Failed to get subscribers: {init_request.status_code} {init_request.text}")
+
+    total_subscribers = init_request.json()["total_count"]
+
+    while True:
+        log.info(f"Requesting with params: {params}")
+
         response = requests.get(url, headers=headers, params=params)
 
         if response.status_code != 200:
             log.error(f"Failed to get subscribers: {response.status_code} {response.text}")
             raise Exception(f"Failed to get subscribers: {response.status_code} {response.text}")
 
-        data = response.json()["data"]
-        
-        subscribers.extend(data)
-        
+        data = response.json()
+        current_page_data = data.get("data", [])
+        subscribers.extend(current_page_data)
+
+        log.info(f"Total subscribers fetched so far: {len(subscribers)}")
+
+        remaining_subscribers = total_subscribers - len(subscribers)
+        if remaining_subscribers < ITEMS_PER_PAGE:
+            params["items"] = remaining_subscribers
+
+        if len(current_page_data) < ITEMS_PER_PAGE:
+            break
+
+        params["page"] += 1
+
         time.sleep(RATE_LIMIT_SLEEP_TIME)
-    
+
     log.info(f"Total subscribers: {len(subscribers)}")
-    return subscribers
+
+    unique_subscribers = []
+    for subscriber in subscribers:
+        if subscriber["id"] not in unique_subscribers:
+            unique_subscribers.append(subscriber["id"])
+        else:
+            log.warning(f"Duplicate subscriber found: {subscriber['id']}")
+
+    log.info(f"Total unique subscribers: {len(unique_subscribers)}")
+
+    return unique_subscribers
