@@ -1,0 +1,66 @@
+name: Deploy Cloud Function
+
+on:
+  workflow_dispatch:
+  # push:
+  #   branches:
+  #     - 'main'
+
+permissions:
+  id-token: write
+  contents: read
+
+jobs:
+  deploy_cloud_function:
+    runs-on: ubuntu-latest
+    environment: vertex-search-prod
+    outputs:
+      id_token: ${{ steps.auth.outputs.id_token }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup uv
+        uses: astral-sh/setup-uv@v4
+
+      - name: Set up Python
+        run: uv python install
+
+      - name: Install the project
+        run: uv sync --all-extras --dev
+
+      - name: Lock requirements - generate requirements.txt
+        run: uv pip compile pyproject.toml -o requirements.txt
+
+      - id: 'auth'
+        uses: 'google-github-actions/auth@v2'
+        with:
+          project_id: ${{ vars.GCP_PROJECT_ID }}
+          workload_identity_provider: ${{ vars.WORKLOAD_IDENTITY_PROVIDER }}
+          service_account: ${{ vars.GCP_GHA_SERVICE_ACCOUNT }}
+
+      - name: Deploy Cloud Function
+        id: deploy_cloud_function
+        uses: 'google-github-actions/deploy-cloud-functions@v3'
+        timeout-minutes: 10
+        with:
+          name: ${{ vars.GCP_CLOUD_FUNCTION_NAME }}
+          entry_point: 'subscribe'
+          runtime: 'python312'
+          cpu: '0.5'
+          memory: '256Mi'
+          ingress_settings: 'ALLOW_INTERNAL_ONLY'
+          max_instance_count: '10'
+          service_timeout: '300s'
+          event_trigger_type: "google.cloud.pubsub.topic.v1.messagePublished"
+          event_trigger_location: ${{ vars.GCP_REGION}}
+          event_trigger_pubsub_topic: ${{ vars.GCP_PUBSUB_TOPIC_NAME }}
+          event_trigger_retry: "false"
+          environment_variables: |
+            GCP_PROJECT_ID=${{ vars.GCP_PROJECT_ID }}
+            GCP_BQ_PROJECT_ID=${{ vars.GCP_BQ_PROJECT_ID }}
+            GCP_CLOUD_FUNCTION_LOCATION=${{ vars.GCP_CLOUD_FUNCTION_LOCATION }}
+      
+      - name: Show deploy output
+        run: |
+          echo ${{ steps.deploy_cloud_function.outputs.url }}
