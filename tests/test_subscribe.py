@@ -1,9 +1,12 @@
+from unittest.mock import patch
 import base64
 from cloudevents.http import CloudEvent
-from main import subscribe  # Import the function to be tested
+from main import subscribe
 
+@patch('src.functions.refresh_all_user_subscription_list')
+def test_subscribe(mock_google_cloud_function, capfd):
+    mock_google_cloud_function.return_value = None
 
-def test_subscribe(capfd):
     attributes = {
         "type": "com.example.someevent",
         "source": "//event.source",
