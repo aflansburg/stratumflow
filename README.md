@@ -8,8 +8,7 @@ Many Cloud Functions will map and subscribe to PubSub Topics that receive a mess
 
 Ensure the PubSub Topic & Cloud Scheduler job exist. See [this Terraform file](https://github.com/remohealth/terraform/blob/main/infra/app/data-platform/gcp/prod/paubox_pipeline.tf) in our Terraform repo.
 
-
-TBD: Diagram
+<img src="assets/flow.jpg" alt="Cloud Function Flow" width="650"/>
 
 ## Local Setup
 
