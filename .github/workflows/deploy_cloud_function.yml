@@ -13,7 +13,7 @@ permissions:
 jobs:
   deploy_cloud_function:
     runs-on: ubuntu-latest
-    environment: vertex-search-prod
+    environment: data-platform-prod
     outputs:
       id_token: ${{ steps.auth.outputs.id_token }}
     steps:

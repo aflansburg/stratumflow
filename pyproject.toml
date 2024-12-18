@@ -12,8 +12,10 @@ dependencies = [
     "google-cloud-bigquery>=3.27.0",
     "google-cloud-core>=2.4.1",
     "pandas>=2.2.3",
+    "py3dns>=4.0.2",
     "requests>=2.32.3",
     "structlog>=24.4.0",
+    "validate-email-address>=1",
 ]
 
 [tool.uv]

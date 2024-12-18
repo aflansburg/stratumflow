@@ -24,9 +24,9 @@ def subscribe(cloud_event: CloudEvent) -> None:
 
 
 # for local testing
-# if __name__ == "__main__":
-#     from src.functions.refresh_all_user_subscription_list import (
-#         refresh_all_user_subscription_list,
-#     )
+if __name__ == "__main__":
+    from src.functions.paubox.refresh_all_user_subscription_list import (
+        refresh_all_user_subscription_list,
+    )
 
-#     refresh_all_user_subscription_list()
+    refresh_all_user_subscription_list()

@@ -555,8 +555,10 @@ dependencies = [
     { name = "google-cloud-bigquery" },
     { name = "google-cloud-core" },
     { name = "pandas" },
+    { name = "py3dns" },
     { name = "requests" },
     { name = "structlog" },
+    { name = "validate-email-address" },
 ]
 
 [package.dev-dependencies]
@@ -576,8 +578,10 @@ requires-dist = [
     { name = "google-cloud-bigquery", specifier = ">=3.27.0" },
     { name = "google-cloud-core", specifier = ">=2.4.1" },
     { name = "pandas", specifier = ">=2.2.3" },
+    { name = "py3dns", specifier = ">=4.0.2" },
     { name = "requests", specifier = ">=2.32.3" },
     { name = "structlog", specifier = ">=24.4.0" },
+    { name = "validate-email-address", specifier = ">=1" },
 ]
 
 [package.metadata.requires-dev]
@@ -630,6 +634,15 @@ wheels = [
     { url = "https://files.pythonhosted.org/packages/fb/4a/ec56f101d38d4bef2959a9750209809242d86cf8b897db00f2f98bfa360e/protobuf-5.29.1-cp38-abi3-manylinux2014_aarch64.whl", hash = "sha256:b5ba1d0e4c8a40ae0496d0e2ecfdbb82e1776928a205106d14ad6985a09ec155", size = 319572 },
     { url = "https://files.pythonhosted.org/packages/04/52/c97c58a33b3d6c89a8138788576d372a90a6556f354799971c6b4d16d871/protobuf-5.29.1-cp38-abi3-manylinux2014_x86_64.whl", hash = "sha256:8ee1461b3af56145aca2800e6a3e2f928108c749ba8feccc6f5dd0062c410c0d", size = 319671 },
     { url = "https://files.pythonhosted.org/packages/3b/24/c8c49df8f6587719e1d400109b16c10c6902d0c9adddc8fff82840146f99/protobuf-5.29.1-py3-none-any.whl", hash = "sha256:32600ddb9c2a53dedc25b8581ea0f1fd8ea04956373c0c07577ce58d312522e0", size = 172547 },
+]
+
+[[package]]
+name = "py3dns"
+version = "4.0.2"
+source = { registry = "https://pypi.org/simple" }
+sdist = { url = "https://files.pythonhosted.org/packages/76/67/d7e745a5248bd7ecf2b76d3a1c8280255cbbdcb21174b171cf3c87740836/py3dns-4.0.2.tar.gz", hash = "sha256:98652e80ecec143c60f78f0e6b341631ca9a7560edd8dddfc864c02902618a39", size = 33982 }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/b7/43/1ff28f5302a0f423d4210cacc1f12fb416b6ba1f4c7107e020d264acb625/py3dns-4.0.2-py3-none-any.whl", hash = "sha256:36bffe62b59a72cfa09c03f0bd3473e0126f20ee4285d14c07415dbf6f5fd571", size = 29589 },
 ]
 
 [[package]]
@@ -797,6 +810,12 @@ sdist = { url = "https://files.pythonhosted.org/packages/ed/63/22ba4ebfe7430b763
 wheels = [
     { url = "https://files.pythonhosted.org/packages/ce/d9/5f4c13cecde62396b0d3fe530a50ccea91e7dfc1ccf0e09c228841bb5ba8/urllib3-2.2.3-py3-none-any.whl", hash = "sha256:ca899ca043dcb1bafa3e262d73aa25c465bfb49e0bd9dd5d59f1d0acba2f8fac", size = 126338 },
 ]
+
+[[package]]
+name = "validate-email-address"
+version = "1"
+source = { registry = "https://pypi.org/simple" }
+sdist = { url = "https://files.pythonhosted.org/packages/62/4c/bf53c66bf1a28635a755e943e2fbd0b29db7ebb9ae8fe9e72d3c4b14907b/validate-email-address-1.tar.gz", hash = "sha256:9c00f978fed19d3df368b054292df7e8443761e44d3fadf95ef25499ea980f43", size = 4906 }
 
 [[package]]
 name = "watchdog"
