@@ -49,6 +49,7 @@ jobs:
         timeout-minutes: 10
         with:
           name: ${{ vars.GCP_CLOUD_FUNCTION_NAME }}
+          region: ${{ vars.GCP_REGION }}
           entry_point: 'subscribe'
           runtime: 'python312'
           cpu: '1'
