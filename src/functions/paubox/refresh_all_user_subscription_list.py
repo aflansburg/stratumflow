@@ -1,8 +1,11 @@
 from google.cloud import bigquery
 
-from ..config.logger import get_logger
-from ..paubox.subscribers import bulk_create_subscribers
-from ..paubox.subscription_list import get_subscription_lists, delete_subscription_list
+from ...config.logger import get_logger
+from ...paubox_api.subscribers import bulk_create_subscribers
+from ...paubox_api.subscription_list import (
+    get_subscription_lists,
+    delete_subscription_list,
+)
 
 log = get_logger()
 

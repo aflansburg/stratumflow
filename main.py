@@ -9,14 +9,14 @@ from cloudevents.http import CloudEvent
 def subscribe(cloud_event: CloudEvent) -> None:
     try:
         message = base64.b64decode(cloud_event.data["message"]["data"]).decode("utf-8")
-        func_name = message.strip()
+        namespace, func_name = message.strip().split(":")
 
-        module = importlib.import_module(f"src.functions.{func_name}")
+        module = importlib.import_module(f"src.functions.{namespace}.{func_name}")
         call_func = getattr(module, func_name)
         call_func()
     except Exception as e:
         if func_name and call_func is None:
-            print(f"Function {func_name} not found")
+            print(f"Function {func_name} not found in namespace {namespace}")
             print(f"Error: {e}")
         else:
             print(f"Error: {e}")
