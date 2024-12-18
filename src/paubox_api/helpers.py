@@ -50,6 +50,8 @@ def validate_subscriber(subscriber: dict):
     return {
         "email": subscriber["email"],
         "first_name": subscriber["firstname"],
-        "account_created": created_at,
-        "last_visited": updated_at,
+        "custom_fields": [
+            {"account_created": created_at},
+            {"last_visited": updated_at},
+        ],
     }

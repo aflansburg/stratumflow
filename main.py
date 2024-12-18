@@ -23,10 +23,16 @@ def subscribe(cloud_event: CloudEvent) -> None:
         return
 
 
-# for local testing
-if __name__ == "__main__":
-    from src.functions.paubox.refresh_all_user_subscription_list import (
-        refresh_all_user_subscription_list,
-    )
+############ L O C A L   T E S T I N G #################################
+# if __name__ == "__main__":
+#     from src.config.logger import get_logger
 
-    refresh_all_user_subscription_list()
+#     log = get_logger()
+
+#     log.debug("Starting local test")
+#     from src.functions.paubox.refresh_all_user_subscription_list import (
+#         refresh_all_user_subscription_list,
+#     )
+
+#     refresh_all_user_subscription_list()
+########################################################################

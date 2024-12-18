@@ -11,6 +11,10 @@ log = get_logger()
 
 
 def refresh_all_user_subscription_list():
+    log.info(
+        "Starting refresh_all_user_subscription_list. "
+        "Please note, the BigQuery job can take a few minutes to complete."
+    )
     client = bigquery.Client()
 
     query = """
@@ -47,4 +51,5 @@ def refresh_all_user_subscription_list():
         subscription_list_name=list_name,
     )
 
-    log.info(f"Result: {result}")
+    log.debug(f"Result: {result}")
+    log.info("Finished refresh_all_user_subscription_list")

@@ -2,9 +2,9 @@ name: Deploy Cloud Function
 
 on:
   workflow_dispatch:
-  # push:
-  #   branches:
-  #     - 'main'
+  push:
+    branches:
+      - 'main'
 
 permissions:
   id-token: write
@@ -39,6 +39,10 @@ jobs:
           workload_identity_provider: ${{ vars.WORKLOAD_IDENTITY_PROVIDER }}
           service_account: ${{ vars.GCP_GHA_SERVICE_ACCOUNT }}
 
+      # The API Key secrets are created in Terraform and the values stored
+      # in sensitive Terraform variables in HCP Terraform (Terraform Cloud)
+      # We could migrate these to Github Action secrets, but this is a one-time
+      # migration and th
       - name: Deploy Cloud Function
         id: deploy_cloud_function
         uses: 'google-github-actions/deploy-cloud-functions@v3'
@@ -57,9 +61,11 @@ jobs:
           event_trigger_pubsub_topic: 'data-platform-dynamic-cloudfunctions'
           event_trigger_retry: "false"
           environment_variables: |
-            GCP_PROJECT_ID=${{ vars.GCP_PROJECT_ID }}
-            GCP_BQ_PROJECT_ID=${{ vars.GCP_BQ_PROJECT_ID }}
-            GCP_CLOUD_FUNCTION_LOCATION=${{ vars.GCP_CLOUD_FUNCTION_LOCATION }}
+            PAUBOX_MARKETING_API_URL=${{ vars.PAUBOX_MARKETING_API_URL }}
+            PAUBOX_EMAIL_API_URL=${{ vars.PAUBOX_EMAIL_API_URL }}
+          secrets: |
+            PAUBOX_MARKETING_API_KEY=${{ vars.PAUBOX_MARKETING_API_SECRET_RESOURCE }}
+            PAUBOX_EMAIL_API_KEY=${{ vars.PAUBOX_EMAIL_API_SECRET_RESOURCE }}
       
       - name: Show deploy output
         run: |

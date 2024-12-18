@@ -66,6 +66,9 @@ def get_subscribers(subscription_list_id: Optional[str] = None) -> dict:
             else invalid_subscribers
         ).append(subscriber)
 
+        # break test
+        break
+
     log.info(f"Valid subscribers count: {len(valid_subscribers)}")
     log.info(
         f"Invalid subscribers count: {len(invalid_subscribers)}\nInvalid Sample: {invalid_subscribers[:5]}"
@@ -106,17 +109,22 @@ def bulk_create_subscribers(
                 f"Current validated subscribers count: {len(validated_subscribers)}"
             )
             log.info(f"Current invalid subscribers count: {len(invalid_subscribers)}")
-            log.info(
-                f"Sample validated subscribers (email removed): {subscriber.pop('email')}"
+
+        if not is_valid_email(subscriber["email"], ignore_common=True):
+            invalid_subscribers.append(subscriber)
+            continue
+
+        validated = validate_subscriber(subscriber)
+        validated_subscribers.append(validated)
+
+        if index % 100 == 0:
+            sample_validated = {k: v for k, v in validated.items() if k != "email"}
+            log.debug(
+                f"Sample validated subscribers (email removed): {sample_validated}"
             )
 
-        if is_valid_email(subscriber["email"], ignore_common=True):
-            validated_subscribers.append(validate_subscriber(subscriber))
-        else:
-            invalid_subscribers.append(subscriber)
-
     log.warning(f"Removed {len(invalid_subscribers)} invalid subscribers")
-    log.warning(f"Invalid Sample: {invalid_subscribers[:5]}")
+    log.debug(f"Invalid Sample: {invalid_subscribers[:5]}")
 
     log.info(f"Validated subscribers count: {len(validated_subscribers)}")
     url = app_config.PAUBOX_MARKETING_API_URL + "/subscribers_bulk_create"
