@@ -55,3 +55,7 @@ coverage.xml
 
 .env
 .env.*
+
+.vscode
+
+.DS_Store

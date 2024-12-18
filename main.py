@@ -24,11 +24,11 @@ def subscribe(cloud_event: CloudEvent) -> None:
             print(f"Error: {e}")
         return
 
-#for local testing
+
+# for local testing
 if __name__ == "__main__":
-    # from src.paubox.subscription_list import get_subscription_list, create_subscription_list
-    # print(get_subscription_list())
-    # print(create_subscription_list("[Internal] Test API POST"))
-    
-    from src.paubox.subscribers import get_subscribers
-    print(len(get_subscribers()))
+    from src.functions.refresh_all_user_subscription_list import (
+        refresh_all_user_subscription_list,
+    )
+
+    refresh_all_user_subscription_list()
