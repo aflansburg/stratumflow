@@ -47,14 +47,14 @@ jobs:
           name: ${{ vars.GCP_CLOUD_FUNCTION_NAME }}
           entry_point: 'subscribe'
           runtime: 'python312'
-          cpu: '0.5'
-          memory: '256Mi'
+          cpu: '1'
+          memory: '2Gi'
           ingress_settings: 'ALLOW_INTERNAL_ONLY'
           max_instance_count: '10'
           service_timeout: '300s'
           event_trigger_type: "google.cloud.pubsub.topic.v1.messagePublished"
           event_trigger_location: ${{ vars.GCP_REGION}}
-          event_trigger_pubsub_topic: ${{ vars.GCP_PUBSUB_TOPIC_NAME }}
+          event_trigger_pubsub_topic: 'data-platform-dynamic-cloudfunctions'
           event_trigger_retry: "false"
           environment_variables: |
             GCP_PROJECT_ID=${{ vars.GCP_PROJECT_ID }}

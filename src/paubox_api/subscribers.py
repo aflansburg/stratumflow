@@ -13,7 +13,8 @@ app_config = AppConfig()
 log = get_logger()
 
 
-# apparently you can only get 10000 subscribers maximum
+# apparently you can only batch request subscribers - pagination does not work
+# in the Paubox Marketing API (looks like a WIP)
 # Paubox sends back a `search_after` parameter, that makes it seem
 # like they're proxying Elasticsearch, so probably no way around
 # this limit
@@ -101,6 +102,10 @@ def bulk_create_subscribers(
     for index, subscriber in enumerate(subscribers):
         if index % 100 == 0:
             log.info(f"Validating subscriber at index: {index}")
+            log.info(
+                f"Current validated subscribers count: {len(validated_subscribers)}"
+            )
+            log.info(f"Current invalid subscribers count: {len(invalid_subscribers)}")
 
         if is_valid_email(subscriber["email"], ignore_common=True):
             validated_subscribers.append(validate_subscriber(subscriber))

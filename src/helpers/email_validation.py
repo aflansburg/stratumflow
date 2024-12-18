@@ -29,7 +29,7 @@ def is_valid_email(email, ignore_common=False):
     try:
         domain = email.split("@")[-1] if "@" in email else email
         if ignore_common and domain in common_emails:
-            return False  # Valid email (common domain)
+            return True  # Valid email (common domain)
 
         validate_email(email)
         return True  # Valid email
