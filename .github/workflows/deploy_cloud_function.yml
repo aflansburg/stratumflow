@@ -59,7 +59,7 @@ jobs:
           service_timeout: '300s'
           event_trigger_type: "google.cloud.pubsub.topic.v1.messagePublished"
           event_trigger_location: ${{ vars.GCP_REGION}}
-          event_trigger_pubsub_topic: 'data-platform-dynamic-cloudfunctions'
+          event_trigger_pubsub_topic: ${{ vars.GCP_PUBSUB_TOPIC_NAME }}
           event_trigger_retry: "false"
           environment_variables: |
             PAUBOX_MARKETING_API_URL=${{ vars.PAUBOX_MARKETING_API_URL }}
