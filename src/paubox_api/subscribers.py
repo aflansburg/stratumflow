@@ -106,6 +106,9 @@ def bulk_create_subscribers(
                 f"Current validated subscribers count: {len(validated_subscribers)}"
             )
             log.info(f"Current invalid subscribers count: {len(invalid_subscribers)}")
+            log.info(
+                f"Sample validated subscribers (email removed): {subscriber.pop('email')}"
+            )
 
         if is_valid_email(subscriber["email"], ignore_common=True):
             validated_subscribers.append(validate_subscriber(subscriber))

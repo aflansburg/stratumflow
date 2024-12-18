@@ -1,4 +1,5 @@
 from ..config.app_config import AppConfig
+from ..helpers.date_time_utils import parse_date
 
 app_config = AppConfig()
 
@@ -43,4 +44,12 @@ def validate_subscriber(subscriber: dict):
                         "Each key and value in 'custom_fields' must be a string."
                     )
 
-    return {"email": subscriber["email"], "first_name": subscriber["firstname"]}
+    created_at = parse_date(subscriber["created_at"])
+    updated_at = parse_date(subscriber["updated_at"])
+
+    return {
+        "email": subscriber["email"],
+        "first_name": subscriber["firstname"],
+        "account_created": created_at,
+        "last_visited": updated_at,
+    }
