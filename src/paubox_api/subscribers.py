@@ -61,7 +61,7 @@ def get_subscribers(subscription_list_id: Optional[str] = None) -> dict:
 
         (
             valid_subscribers
-            if is_valid_email(subscriber["attributes"]["email"])
+            if is_valid_email(subscriber["email"], ignore_common=True)
             else invalid_subscribers
         ).append(subscriber)
 
@@ -98,8 +98,11 @@ def bulk_create_subscribers(
     invalid_subscribers, validated_subscribers = [], []
 
     log.info(f"Validating {len(subscribers)} subscribers")
-    for subscriber in subscribers:
-        if is_valid_email(subscriber["email"]):
+    for index, subscriber in enumerate(subscribers):
+        if index % 100 == 0:
+            log.info(f"Validating subscriber at index: {index}")
+
+        if is_valid_email(subscriber["email"], ignore_common=True):
             validated_subscribers.append(validate_subscriber(subscriber))
         else:
             invalid_subscribers.append(subscriber)
