@@ -31,4 +31,4 @@ if __name__ == "__main__":
     # print(create_subscription_list("[Internal] Test API POST"))
     
     from src.paubox.subscribers import get_subscribers
-    print(get_subscribers())
+    print(len(get_subscribers()))
