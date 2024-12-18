@@ -63,6 +63,7 @@ jobs:
           environment_variables: |
             PAUBOX_MARKETING_API_URL=${{ vars.PAUBOX_MARKETING_API_URL }}
             PAUBOX_EMAIL_API_URL=${{ vars.PAUBOX_EMAIL_API_URL }}
+            RUN_ENV=production
           secrets: |
             PAUBOX_MARKETING_API_KEY=${{ vars.PAUBOX_MARKETING_API_SECRET_RESOURCE }}
             PAUBOX_EMAIL_API_KEY=${{ vars.PAUBOX_EMAIL_API_SECRET_RESOURCE }}

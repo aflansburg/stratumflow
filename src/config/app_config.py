@@ -62,7 +62,7 @@ class AppConfig:
             log.info("Loading .env file.")
             load_dotenv()
 
-        self.ENVIRONMENT = os.getenv("ENV", "dev")
+        self.ENVIRONMENT = os.getenv("RUN_ENV", "dev")
         self.PAUBOX_EMAIL_API_KEY = os.getenv("PAUBOX_EMAIL_API_KEY")
         self.PAUBOX_EMAIL_API_URL = os.getenv("PAUBOX_EMAIL_API_URL")
         self.PAUBOX_MARKETING_API_KEY = os.getenv("PAUBOX_MARKETING_API_KEY")
