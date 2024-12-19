@@ -119,36 +119,35 @@ def bulk_create_subscribers(
 
     log.info(f"Validated subscribers count: {len(validated_subscribers)}")
 
-    # if should_create_subscription_list:
-    #     if not subscription_list_name:
-    #         log.error("Subscription list name is required")
-    #         raise Exception("Subscription list name is required")
-    #     subscription_list_response = create_subscription_list(subscription_list_name)
-    #     subscription_list_id = subscription_list_response["data"]["id"]
+    if should_create_subscription_list:
+        if not subscription_list_name:
+            log.error("Subscription list name is required")
+            raise Exception("Subscription list name is required")
+        subscription_list_response = create_subscription_list(subscription_list_name)
+        subscription_list_id = subscription_list_response["data"]["id"]
 
-    #     log.info(f"Subscription list created: {subscription_list_response}")
+        log.info(f"Subscription list created: {subscription_list_response}")
 
-    # url = app_config.PAUBOX_MARKETING_API_URL + "/subscribers_bulk_create"
-    # log.info(f"Creating subscribers at {url}")
+    url = app_config.PAUBOX_MARKETING_API_URL + "/subscribers_bulk_create"
+    log.info(f"Creating subscribers at {url}")
 
-    # headers = generate_paubox_api_headers("marketing")
+    headers = generate_paubox_api_headers("marketing")
 
-    # response = requests.post(
-    #     url,
-    #     headers=headers,
-    #     json={
-    #         "subscribers": validated_subscribers,
-    #         "subscription_list_id": subscription_list_id,
-    #     },
-    # )
+    response = requests.post(
+        url,
+        headers=headers,
+        json={
+            "subscribers": validated_subscribers,
+            "subscription_list_id": subscription_list_id,
+        },
+    )
 
-    # if response.status_code != 200:
-    #     log.error(
-    #         f"Failed to create subscribers: {response.status_code} {response.text}"
-    #     )
-    #     raise Exception(
-    #         f"Failed to create subscribers: {response.status_code} {response.text}"
-    #     )
+    if response.status_code != 200:
+        log.error(
+            f"Failed to create subscribers: {response.status_code} {response.text}"
+        )
+        raise Exception(
+            f"Failed to create subscribers: {response.status_code} {response.text}"
+        )
 
-    # return response.json()
-    return {"success": True}
+    return response.json()
