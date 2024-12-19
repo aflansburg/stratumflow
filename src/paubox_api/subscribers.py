@@ -83,15 +83,6 @@ def bulk_create_subscribers(
     should_create_subscription_list: Optional[bool] = False,
     subscription_list_name: Optional[str] = None,
 ) -> dict:
-    if should_create_subscription_list:
-        if not subscription_list_name:
-            log.error("Subscription list name is required")
-            raise Exception("Subscription list name is required")
-        subscription_list_response = create_subscription_list(subscription_list_name)
-        subscription_list_id = subscription_list_response["data"]["id"]
-
-        log.info(f"Subscription list created: {subscription_list_response}")
-
     if not subscribers:
         log.info("No subscribers to create")
         return
@@ -127,6 +118,16 @@ def bulk_create_subscribers(
     log.debug(f"Invalid Sample: {invalid_subscribers[:5]}")
 
     log.info(f"Validated subscribers count: {len(validated_subscribers)}")
+
+    if should_create_subscription_list:
+        if not subscription_list_name:
+            log.error("Subscription list name is required")
+            raise Exception("Subscription list name is required")
+        subscription_list_response = create_subscription_list(subscription_list_name)
+        subscription_list_id = subscription_list_response["data"]["id"]
+
+        log.info(f"Subscription list created: {subscription_list_response}")
+
     url = app_config.PAUBOX_MARKETING_API_URL + "/subscribers_bulk_create"
     log.info(f"Creating subscribers at {url}")
 
