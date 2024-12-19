@@ -44,14 +44,14 @@ def validate_subscriber(subscriber: dict):
                         "Each key and value in 'custom_fields' must be a string."
                     )
 
-    created_at = parse_date(subscriber["created_at"])
-    updated_at = parse_date(subscriber["updated_at"])
+    account_created = parse_date(subscriber["account_created"])
+    last_visited = parse_date(subscriber["last_visited"])
 
     return {
         "email": subscriber["email"],
         "first_name": subscriber["firstname"],
         "custom_fields": [
-            {"account_created": created_at},
-            {"last_visited": updated_at},
+            {"account_created": account_created},
+            {"last_visited": last_visited},
         ],
     }
