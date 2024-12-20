@@ -49,12 +49,12 @@ class AppConfig:
         """
 
         # explicitly set environment to production in Cloud Run
-        self.ENVIRONMENT = os.getenv("ENV") or "dev"
+        self.ENVIRONMENT = os.getenv("RUN_ENV") or "dev"
 
         if self.ENVIRONMENT == "dev":
             log.info(
                 "This environment was detected as development. "
-                "If this is uneepected, please check the ENV variable."
+                "If this is uneepected, please check the RUN_ENV variable."
             )
 
             from dotenv import load_dotenv
@@ -68,7 +68,7 @@ class AppConfig:
         self.PAUBOX_MARKETING_API_KEY = os.getenv("PAUBOX_MARKETING_API_KEY")
         self.PAUBOX_MARKETING_API_URL = os.getenv("PAUBOX_MARKETING_API_URL")
 
-        should_ensure = ensure and os.getenv("ENV") != "test"
+        should_ensure = ensure and os.getenv("RUN_ENV") != "test"
 
         for var in self.REQUIRED_ENV_VARS:
             value = os.getenv(var)
