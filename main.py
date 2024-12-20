@@ -3,18 +3,20 @@ import importlib
 import os
 import functions_framework
 from cloudevents.http import CloudEvent
+from src.config.logger import get_logger
+
+log = get_logger()
 
 
 def call_function_from_message(message: str) -> None:
     try:
+        log.info(f"Received message: {message}")
         namespace, func_name = message.strip().split(":")
         module = importlib.import_module(f"src.functions.{namespace}.{func_name}")
         call_func = getattr(module, func_name)
         call_func()
     except Exception as e:
-        if func_name and call_func is None:
-            print(f"Function {func_name} not found in namespace {namespace}")
-        print(f"Error: {e}")
+        log.error(f"Error: {e}")
 
 
 @functions_framework.cloud_event
@@ -23,7 +25,7 @@ def subscribe(cloud_event: CloudEvent) -> None:
         message = base64.b64decode(cloud_event.data["message"]["data"]).decode("utf-8")
         call_function_from_message(message)
     except Exception as e:
-        print(f"Error: {e}")
+        log.error(f"Error: {e}")
         return
 
 

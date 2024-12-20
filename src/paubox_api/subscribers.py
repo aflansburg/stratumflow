@@ -86,9 +86,11 @@ def bulk_create_subscribers(
     if not subscribers:
         log.info("No subscribers to create")
         return
-    if not subscription_list_id:
-        log.error("Subscription list ID is required")
-        raise Exception("Subscription list ID is required")
+
+    if not should_create_subscription_list and not subscription_list_id:
+        error_message = "Subscription list ID is required when not creating a new list"
+        log.error(error_message)
+        raise Exception(error_message)
 
     invalid_subscribers, validated_subscribers = [], []
 
