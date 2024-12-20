@@ -1,5 +1,7 @@
 # cloudfunctions
 
+![Deploy Cloud Function](https://github.com/remohealth/vertex-search-svc/actions/workflows/deploy_cloud_function.yml/badge.svg)
+
 Repository for data platform related Cloud Functions.
 
 ## PubSub Topic to Cloud Function mapping
