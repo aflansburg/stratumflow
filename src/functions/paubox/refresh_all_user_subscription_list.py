@@ -26,7 +26,7 @@ def refresh_all_user_subscription_list():
 
     log.info(f"Number of users: {results.total_rows}")
 
-    list_name = "[TEST] All Registered Users"
+    list_name = "All Registered Users"
 
     list_id = next(
         (
