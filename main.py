@@ -28,7 +28,7 @@ def subscribe(cloud_event: CloudEvent) -> None:
 
 
 ############ L O C A L   T E S T I N G #################################
-if __name__ == "__main__" and os.getenv("ENV") == "dev":
+if __name__ == "__main__" and os.getenv("RUN_ENV", "dev") == "dev":
     import sys
     from src.config.logger import get_logger
 
