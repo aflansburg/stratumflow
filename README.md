@@ -6,7 +6,6 @@ A practical and layered approach to handling cloud native job execution.
 
 Read more:
 - [Notion Web](https://www.notion.so/remohealth/StratumFlow-165778a1a81b80a38f53c1968a33cba9?pvs=4)
-- [Notion Desktop](notion://remohealth/StratumFlow-165778a1a81b80a38f53c1968a33cba9?pvs=4)
 
 <img src="assets/stratumflow.jpg" alt="Cloud Function Flow" width="650"/>
 
