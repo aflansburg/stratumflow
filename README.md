@@ -1,8 +1,12 @@
-# cloudfunctions
+# StratumFlow
 
 ![Deploy Cloud Function](https://github.com/remohealth/cloudfunctions/actions/workflows/deploy_cloud_function.yml/badge.svg)
 
-Repository for data platform related Cloud Functions.
+A practical and layered approach to handling cloud native job execution.
+
+Read more [here](https://www.notion.so/remohealth/StratumFlow-165778a1a81b80a38f53c1968a33cba9?pvs=4)
+
+<img src="assets/stratumflow.jpg" alt="Cloud Function Flow" width="650"/>
 
 ## PubSub Topic to Cloud Function mapping
 
