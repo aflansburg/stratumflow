@@ -1,11 +1,7 @@
 # StratumFlow
 
-![Deploy Cloud Function](https://github.com/remohealth/cloudfunctions/actions/workflows/deploy_cloud_function.yml/badge.svg)
 
 A practical and layered approach to handling cloud native job execution.
-
-Read more:
-- [Notion Web](https://www.notion.so/remohealth/StratumFlow-165778a1a81b80a38f53c1968a33cba9?pvs=4)
 
 <img src="assets/stratumflow.jpg" alt="Cloud Function Flow" width="650"/>
 
@@ -13,7 +9,7 @@ Read more:
 
 Many Cloud Functions will map and subscribe to PubSub Topics that receive a message directive from Google Cloud Scheduler. The Cloud Scheduler push to PubSub topic is the initial trigger that creates the message in the topic that the Cloud Function subscribes to.
 
-Ensure the PubSub Topic & Cloud Scheduler job exist. See [this Terraform file](https://github.com/remohealth/terraform/blob/main/infra/app/data-platform/gcp/prod/paubox_pipeline.tf) in our Terraform repo.
+Ensure the PubSub Topic & Cloud Scheduler job exist.
 
 ## Example Paubox use case for Cloud Functions
 
