@@ -7,6 +7,8 @@ Designed to work with:
 - Google Cloud Scheduler
 - Google Cloud Run Functions
 
+Credit to @Minh5 for the inspiration!
+
 <img src="assets/stratumflow.jpg" alt="Cloud Function Flow" width="650"/>
 
 ## Infrastructure setup
