@@ -1,9 +1,17 @@
 # StratumFlow
 
+A practical and layered approach to handling cloud native job executio on Google Cloud.
 
-A practical and layered approach to handling cloud native job execution.
+Designed to work with:
+- Google PubSub
+- Google Cloud Scheduler
+- Google Cloud Run Functions
 
 <img src="assets/stratumflow.jpg" alt="Cloud Function Flow" width="650"/>
+
+## Infrastructure setup
+
+TBD
 
 ## PubSub Topic to Cloud Function mapping
 
@@ -13,7 +21,7 @@ Ensure the PubSub Topic & Cloud Scheduler job exist.
 
 ## Example Paubox use case for Cloud Functions
 
-<img src="assets/flow.jpg" alt="Cloud Function Flow" width="650"/>
+<img src="assets/example-flow-with-paubox.jpg" alt="Cloud Function Flow" width="650"/>
 
 ## Local Setup
 

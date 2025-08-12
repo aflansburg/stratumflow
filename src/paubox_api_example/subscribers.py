@@ -2,11 +2,10 @@ from typing import Optional, List
 
 import requests
 
-from ..config.app_config import AppConfig
-from ..config.logger import get_logger
+from src.config import AppConfig, get_logger
 from .helpers import generate_paubox_api_headers, validate_subscriber
 from .subscription_list import create_subscription_list
-from ..helpers.email_validation import is_valid_email
+from src.helpers import is_valid_email
 
 app_config = AppConfig()
 

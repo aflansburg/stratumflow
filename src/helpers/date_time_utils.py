@@ -1,7 +1,7 @@
 from datetime import datetime
 import pandas as pd
 
-from ..config.logger import get_logger
+from src.config import get_logger
 
 log = get_logger()
 

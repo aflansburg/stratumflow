@@ -1,6 +1,5 @@
 import requests
-from ..config.app_config import AppConfig
-from ..config.logger import get_logger
+from src.config import AppConfig, get_logger
 from .helpers import generate_paubox_api_headers
 
 app_config = AppConfig()

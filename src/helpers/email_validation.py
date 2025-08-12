@@ -13,7 +13,6 @@ def is_valid_email(email, ignore_common=False):
         "hotmail.com",
         "icloud.com",
         "comcast.net",
-        "remo.health",
         "msn.com",
         "outlook.com",
         "verizon.net",

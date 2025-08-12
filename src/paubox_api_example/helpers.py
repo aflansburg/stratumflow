@@ -1,5 +1,5 @@
-from ..config.app_config import AppConfig
-from ..helpers.date_time_utils import parse_date
+from src.config import AppConfig
+from src.helpers import parse_date
 
 app_config = AppConfig()
 
