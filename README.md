@@ -1,6 +1,6 @@
 # StratumFlow
 
-A practical and layered approach to handling cloud native job executio on Google Cloud.
+A practical and layered approach to handling cloud native job execution on Google Cloud.
 
 Designed to work with:
 - Google PubSub
